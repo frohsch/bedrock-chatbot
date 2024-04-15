@@ -1,0 +1,20 @@
+service: smwu-aiml-<<YOUR_NUMBER>>-bedrock-function
+frameworkVersion: "3"
+provider:
+  name: aws
+  runtime: python3.12
+  region: ap-northeast-2
+  iam:
+    role:
+      managedPolicies:
+        # - "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
+        - "arn:aws:iam::907729080149:policy/Bedrock_Mini" # IAM Console에서 확인 가능
+
+functions:
+  invokeBedrockRuntime:
+    handler: app.lambda_handler
+    # app: lambda 핸들러가 작성된 파일
+    # lambda_handler: lambda 핸들러 이름
+    timeout: 900 # 초 단위로 입력. 최대 900초(15분)
+    memorySize: 128
+    url: true

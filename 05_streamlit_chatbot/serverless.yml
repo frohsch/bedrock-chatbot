@@ -1,0 +1,19 @@
+service: smwu-aiml-<<YOUR_NUMBER>>-bedrock-function-sls
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-northeast-2
+  iam:
+    role:
+      managedPolicies:
+        - "arn:aws:iam::907729080149:policy/Bedrock_Mini"
+
+functions:
+  invokeBedrockRuntime:
+    handler: app.handler
+    timeout: 900
+    memorySize: 128
+    url:
+      invokeMode: RESPONSE_STREAM

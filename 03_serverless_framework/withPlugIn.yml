@@ -1,0 +1,23 @@
+service: smwu-aiml-<<YOUR_NUMBER>>-bedrock-function
+frameworkVersion: "3"
+
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+provider:
+  name: aws
+  runtime: python3.10
+  region: ap-northeast-2
+  iam:
+    role:
+      managedPolicies: "arn:aws:iam::aws:policy/AmazonBedrockFullAccess"
+
+functions:
+  invokeBedrockRuntime:
+    handler: app.lambda_handler
+    timeout: 900
+    memorySize: 128
+    url: true
